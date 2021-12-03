@@ -1,7 +1,6 @@
 package helton.spring.jwt.api.controllers;
 
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -14,14 +13,9 @@ import helton.spring.jwt.api.repositories.AdministratorJpaRepository;
 import helton.spring.jwt.api.utils.PasswordEncoder;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.transaction.annotation.Transactional;
-
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
 import java.util.List;
 
-@Transactional
+
 @RestController
 public class AdministratorController
 {

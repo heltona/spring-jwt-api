@@ -15,16 +15,6 @@ import helton.spring.jwt.api.utils.Authenticator;
 
 import org.springframework.web.bind.annotation.RequestParam;
 
-import org.hibernate.SessionFactory;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.Root;
-
-import org.hibernate.query.Query;
-import org.hibernate.Transaction;
-
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

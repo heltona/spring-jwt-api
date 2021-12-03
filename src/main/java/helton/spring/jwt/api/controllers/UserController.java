@@ -11,13 +11,8 @@ import helton.spring.jwt.api.repositories.UserRepository;
 import helton.spring.jwt.api.utils.Authenticator;
 import helton.spring.jwt.api.utils.PasswordEncoder;
 
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.hibernate.SessionFactory;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
-
 import javax.servlet.http.HttpServletResponse;
 
 @RestController
