@@ -1,0 +1,41 @@
+# Created at 2021-12-03T16:58:03.252
+TestSet has not finished before stream error has appeared >> initializing exit by non-null configuration: null
+java.io.EOFException
+	at java.base/java.io.DataInputStream.readInt(DataInputStream.java:398)
+	at org.apache.maven.surefire.booter.MasterProcessCommand.decode(MasterProcessCommand.java:115)
+	at org.apache.maven.surefire.booter.CommandReader$CommandRunnable.run(CommandReader.java:391)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+
+
+# Created at 2021-12-03T16:58:05.616
+Unexpected IOException with stream: 2021-12-03 16:58:05.614  INFO 17631 --- [           main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+
+
+# Created at 2021-12-03T16:58:05.813
+Unexpected IOException with stream: 2021-12-03 16:58:05.804  INFO 17631 --- [           main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.6.1.Final
+
+
+# Created at 2021-12-03T16:58:06.875
+Unexpected IOException with stream: 2021-12-03 16:58:06.874  INFO 17631 --- [           main] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+
+
+# Created at 2021-12-03T16:58:09.805
+Unexpected IOException with stream: 2021-12-03 16:58:09.804  INFO 17631 --- [           main] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+
+
+# Created at 2021-12-03T16:58:11.529
+Unexpected IOException with stream: 2021-12-03 16:58:11.522  INFO 17631 --- [           main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+
+
+# Created at 2021-12-03T16:58:11.576
+Unexpected IOException with stream: 2021-12-03 16:58:11.567  INFO 17631 --- [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+
+
+# Created at 2021-12-03T16:58:11.637
+Unexpected IOException with stream: 2021-12-03 16:58:11.637  WARN 17631 --- [           main] o.s.w.c.s.GenericWebApplicationContext   : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'administratorController': Unsatisfied dependency expressed through field 'rep'; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type 'helton.spring.jwt.api.repositories.AdministratorJpaRepository' available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
+
+
+# Created at 2021-12-03T16:58:11.638
+Unexpected IOException with stream: 2021-12-03 16:58:11.638  INFO 17631 --- [           main] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+
+

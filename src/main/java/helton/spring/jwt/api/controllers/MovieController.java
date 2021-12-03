@@ -4,11 +4,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import helton.spring.jwt.api.model.ApiResponse;
 import helton.spring.jwt.api.model.Movie;
 import helton.spring.jwt.api.repositories.MovieRepository;
 import helton.spring.jwt.api.utils.Authenticator;
@@ -18,8 +20,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 
 @RestController
+@Validated
 public class MovieController
 {
 
@@ -30,7 +35,7 @@ public class MovieController
 	private Authenticator auth;
 
 	@RequestMapping(path = "/movie", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public String createMovie(@RequestBody Movie movie, HttpServletRequest req, HttpServletResponse resp)
+	public ApiResponse createMovie(@RequestBody Movie movie, HttpServletRequest req, HttpServletResponse resp)
 	{
 
 		try {
@@ -39,7 +44,7 @@ public class MovieController
 			if (auth.isAdmin(token)) {
 
 				rep.createMovie(movie);
-				return "{\"success\": true}";
+				return new ApiResponse(true);
 			}
 		} catch (Exception ex) {
 			ex.printStackTrace();
@@ -47,7 +52,7 @@ public class MovieController
 		
 		resp.setStatus(HttpServletResponse.SC_FORBIDDEN);
 		
-		return "{\"success\": false}";
+		return new ApiResponse(false);
 	}
 
 	@RequestMapping(path = "/movie/single/{movieId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -67,18 +72,20 @@ public class MovieController
 
 	}
 
+	
 	@RequestMapping(path = "/movie/vote/{movieId}", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-	public String addVote(@PathVariable("movieId") Long movieId, @RequestParam Integer vote, HttpServletRequest req, HttpServletResponse resp)
+	public ApiResponse addVote(@PathVariable("movieId") Long movieId, @RequestParam @Min(0) @Max(4) Integer vote, HttpServletRequest req, HttpServletResponse resp)
 	{
 
 		try {
+			
 			String token = req.getHeader("Authorization").replace("Bearer ", "");
 
 			if (auth.isDefault(token)) {
 
 				rep.voteInAMovie(movieId, vote);
 
-				return "{\"success\": true}";
+				return new ApiResponse(true);
 			}
 			
 		} catch (Exception ex) {
@@ -87,6 +94,6 @@ public class MovieController
 		
 		resp.setStatus(HttpServletResponse.SC_FORBIDDEN);
 		
-		return "{\"success\": false}";
+		return new ApiResponse(false);
 	}
 }

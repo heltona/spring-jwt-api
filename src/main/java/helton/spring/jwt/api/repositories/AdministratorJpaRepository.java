@@ -20,8 +20,10 @@ public class AdministratorJpaRepository
 
 	public List<User> getAllActiveNotAdministratorUsers(Integer offset, Integer limit)
 	{
+		
 		TypedQuery<User> query = entityManager
-				.createQuery("SELECT u FROM User u ORDER BY u.name WHERE role = 'DEFAULT' AND ENABLED = 1", User.class);
+				.createQuery("SELECT u FROM User u WHERE u.role = 'DEFAULT' AND u.enabled = 1  ORDER BY u.name", User.class);
+
 		query.setFirstResult(offset != null ? offset : 0);
 
 		if (limit != null) {

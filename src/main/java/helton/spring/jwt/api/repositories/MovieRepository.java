@@ -56,6 +56,11 @@ public class MovieRepository
 			criteria.where(criteriaBuilder.equal(root.get("genre"), genre));
 
 		Query<Movie> query = session.createQuery(criteria);
+		
+		query.setFirstResult(offset != null ? offset : 0);
+		
+		if(limit != null)
+			query.setMaxResults(limit);
 
 		return query.getResultList();
 	}

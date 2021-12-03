@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import helton.spring.jwt.api.model.ApiResponse;
 import helton.spring.jwt.api.model.User;
 import helton.spring.jwt.api.repositories.UserRepository;
 import helton.spring.jwt.api.utils.Authenticator;
@@ -29,7 +30,7 @@ public class UserController
 	private PasswordEncoder pe;
 
 	@RequestMapping(path = "/user", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public String createUser(@RequestBody User user)
+	public ApiResponse createUser(@RequestBody User user)
 	{
 		try {
 			
@@ -38,18 +39,18 @@ public class UserController
 			
 			user = rep.createUser(user);
 			
-			return "{\"success\": true}";
+			return new ApiResponse(true);
 			
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
 		
-		return "{\"success\": false}";
+		return new ApiResponse(false);
 
 	}
 
 	@RequestMapping(path = "/user", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public String editeUser(@RequestBody User user)
+	public ApiResponse editeUser(@RequestBody User user)
 	{
 		try {
 			
@@ -58,32 +59,32 @@ public class UserController
 
 			rep.updateUser(user);
 			
-			return "{\"success\": false}";
+			return new ApiResponse(true);
 			
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
 
-		return "{\"success\": false}";
+		return new ApiResponse(false);
 	}
 
 	@RequestMapping(path = "/user/{id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public String disableUser(@PathVariable("id") long id)
+	public ApiResponse disableUser(@PathVariable("id") long id)
 	{
 		try {
 			rep.disableUser(id);
-			return "{\"success\": true}";
+			return new ApiResponse(true);
 			
 		} catch(Exception ex) {
 			ex.printStackTrace();
 		}
 		
-		return "{\"success\": false}";
+		return new ApiResponse(false);
 		
 	}
 
 	@RequestMapping(path = "/auth", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-	public String authenticate(@RequestBody User user, HttpServletResponse resp)
+	public ApiResponse authenticate(@RequestBody User user, HttpServletResponse resp)
 	{
 		try {
 
@@ -91,11 +92,11 @@ public class UserController
 
 			resp.addHeader("Authorization", "Bearer " + token);
 
-			return "{\"success\": true}";
+			return new ApiResponse(true);
 
 		} catch (Exception ex) {
 			ex.printStackTrace();
-			return "{\"success\": false}";
+			return new ApiResponse(false);
 		}
 	}
 

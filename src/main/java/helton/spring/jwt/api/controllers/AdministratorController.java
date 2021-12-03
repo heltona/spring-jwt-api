@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
+import helton.spring.jwt.api.model.ApiResponse;
 import helton.spring.jwt.api.model.User;
 import helton.spring.jwt.api.repositories.AdministratorJpaRepository;
 import helton.spring.jwt.api.utils.PasswordEncoder;
@@ -27,7 +28,7 @@ public class AdministratorController
 	private PasswordEncoder pe;
 
 	@RequestMapping(path = "/administrador", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public String createAdministrator(@RequestBody User user)
+	public ApiResponse createAdministrator(@RequestBody User user)
 	{
 		try {
 			
@@ -36,17 +37,17 @@ public class AdministratorController
 
 			rep.createAdministrator(user);
 			
-			return "{\"success\": true}";
+			return new ApiResponse(true);
 			
 		} catch (Exception ex) {
 			System.out.println(ex);
 		}
 		
-		return "{\"success\": false}";
+		return new ApiResponse(false);
 	}
 
 	@RequestMapping(path = "/administrador", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public String editeAdministrator(@RequestBody User user)
+	public ApiResponse editeAdministrator(@RequestBody User user)
 	{
 		try {
 			
@@ -55,18 +56,27 @@ public class AdministratorController
 
 			user = rep.updateAdministrator(user);
 			
-			return "{\"success\": true}";
+			return new ApiResponse(true);
 		} catch (Exception ex) {
 			System.out.println(ex);
 		}
 		
-		return "{\"success\": false}";
+		return new ApiResponse(false);
 	}
 
 	@RequestMapping(path = "/administrador/{id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public User disableAdministrator(@PathVariable("id") long id)
+	public ApiResponse disableAdministrator(@PathVariable("id") long id)
 	{
-		return rep.disableAdministrator(id);
+		try {
+			
+			rep.disableAdministrator(id);
+			return new ApiResponse(true);
+			
+		} catch(Exception ex) {
+			ex.printStackTrace();
+		}
+		
+		return new ApiResponse(false);
 
 	}
 
